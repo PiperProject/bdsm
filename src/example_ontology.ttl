@@ -1,0 +1,15 @@
+<http://schema.org/City> <http://www.schema.org/containedInPlace> <http://schema.org/State> .
+<http://schema.org/State> <http://www.schema.org/containedInPlace> <http://schema.org/Country> .
+<http://schema.org/City> <http://www.schema.org/containedInPlace> <http://schema.org/Country> .
+
+<http://example.org/arendelle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/City> .
+<http://example.org/norway> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Country> .
+
+<http://example.org/arendelle> <http://www.schema.org/containedInPlace> <http://schema.org/City> .
+<http://example.org/arendelle> <http://www.schema.org/containedInPlace> <http://schema.org/Country> .
+<http://example.org/norway> <http://www.schema.org/containedInPlace> <http://schema.org/Country> .
+
+<http://example.org/arendelle> <http://www.schema.org/containedInPlace> <http://example.org/norway> .
+
+<http://example.org/arendelle> <http://xmlns.com/foaf/0.1/name> "arendelle" .
+<http://example.org/norway> <http://xmlns.com/foaf/0.1/name> "norway" .
