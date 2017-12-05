@@ -2,7 +2,7 @@
 #!/usr/bin/env python
 
 '''
-Test_bdsm.py
+Test_ontods.py
 '''
 
 
@@ -14,18 +14,18 @@ import inspect, logging, os, pickledb, pprint, random, rdflib, sqlite3, sys, uni
 from StringIO import StringIO
 from pymongo import MongoClient
 
-import BDSM
+import OntoDS
 
-SAVEPATH      = os.path.abspath( __file__ + "/../../../bdsm/src" )
+SAVEPATH      = os.path.abspath( __file__ + "/../../../ontods/src" )
 
 CURR_PATH     = os.path.abspath( __file__ + "/..")
 MONGOSAVEPATH = os.path.abspath( __file__ + "/../../dbtmp")
 
 
-###############
-#  TEST BDSM  #
-###############
-class Test_bdsm( unittest.TestCase ) :
+#################
+#  TEST ONTODS  #
+#################
+class Test_ontods( unittest.TestCase ) :
 
   #logging.basicConfig( format='%(levelname)s:%(message)s', level=logging.DEBUG )
   logging.basicConfig( format='%(levelname)s:%(message)s', level=logging.INFO )
@@ -42,24 +42,24 @@ class Test_bdsm( unittest.TestCase ) :
     logging.info( "  Running test " + test_id )
 
     # --------------------------------------------------------------- #
-    # create bdsm instance
-    bdsm = BDSM.BDSM( "mongodb" )
-    bdsm.MONGOSAVEPATH = MONGOSAVEPATH
-    logging.debug( "  " + test_id + " : instantiated BDSM instance '" + str( bdsm ) + "' with db type '" + bdsm.nosql_type + "'"  )
+    # create ontods instance
+    ontods = OntoDS.OntoDS( "mongodb" )
+    ontods.MONGOSAVEPATH = MONGOSAVEPATH
+    logging.debug( "  " + test_id + " : instantiated OntoDS instance '" + str( ontods ) + "' with db type '" + ontods.nosql_type + "'"  )
 
     # --------------------------------------------------------------- #
     # input ontology
 
-    bdsm.loadOntology( "./example_ontology.ttl" )
+    ontods.loadOntology( "./example_ontology.ttl" )
 
     # --------------------------------------------------------------- #
     # build database
 
     anInsert = { "name":"Elsa", "age":21, "City":"arendelle", "Country":"norway" }
-    self.assertEqual( bdsm.verify( anInsert, [ 'name', 'age' ] ), True )
+    self.assertEqual( ontods.verify( anInsert, [ 'name', 'age' ] ), True )
 
     # --------------------------------------------------------------- #
-    if bdsm.verify( anInsert, [ 'name', 'age' ] ) :
+    if ontods.verify( anInsert, [ 'name', 'age' ] ) :
 
       # --------------------------------------------------------------- #
       # create db instance
@@ -111,24 +111,24 @@ class Test_bdsm( unittest.TestCase ) :
     logging.info( "  Running test " + test_id )
 
     # --------------------------------------------------------------- #
-    # create bdsm instance
-    bdsm = BDSM.BDSM( "pickledb" )
-    logging.debug( "  " + test_id + " : instantiated BDSM instance '" + str( bdsm ) + "' with db type '" + bdsm.nosql_type + "'"  )
+    # create ontods instance
+    ontods = OntoDS.OntoDS( "pickledb" )
+    logging.debug( "  " + test_id + " : instantiated OntoDS instance '" + str( ontods ) + "' with db type '" + ontods.nosql_type + "'"  )
 
     # --------------------------------------------------------------- #
     # input ontology
 
-    bdsm.loadOntology( "./example_ontology.ttl" )
+    ontods.loadOntology( "./example_ontology.ttl" )
 
     # --------------------------------------------------------------- #
     # build database
 
     anInsert = { "name":"Elsa", "age":21, "City":"arendelle", "Country":"norway" }
 
-    self.assertEqual( bdsm.verify( anInsert, [ 'name', 'age' ] ), True )
+    self.assertEqual( ontods.verify( anInsert, [ 'name', 'age' ] ), True )
 
     # --------------------------------------------------------------- #
-    if bdsm.verify( anInsert, [ 'name', 'age' ] ) :
+    if ontods.verify( anInsert, [ 'name', 'age' ] ) :
 
       # --------------------------------------------------------------- #
       # create db instance
@@ -169,22 +169,22 @@ class Test_bdsm( unittest.TestCase ) :
     logging.info( "  Running test " + test_id )
 
     # --------------------------------------------------------------- #
-    # create bdsm instance
-    bdsm = BDSM.BDSM( "pickledb" )
-    logging.debug( "  " + test_id + " : instantiated BDSM instance '" + str( bdsm ) + "' with db type '" + bdsm.nosql_type + "'"  )
+    # create ontods instance
+    ontods = OntoDS.OntoDS( "pickledb" )
+    logging.debug( "  " + test_id + " : instantiated OntoDS instance '" + str( ontods ) + "' with db type '" + ontods.nosql_type + "'"  )
 
     # --------------------------------------------------------------- #
     # input ontology
 
-    bdsm.loadOntology( "./example_ontology.ttl" )
+    ontods.loadOntology( "./example_ontology.ttl" )
 
     # --------------------------------------------------------------- #
     # build database
 
     anInsert = { "name":"Elsa", "age":21, "City":"losangeles", "Country":"norway" } 
 
-    self.assertEqual( bdsm.verify( anInsert, [ 'name', 'age' ] ), False )
-    self.assertEqual( bdsm.explain( anInsert, [ 'name', 'age' ] ), ["EXPLANATION : no predicates map subject 'losangeles' to object 'City'"] )
+    self.assertEqual( ontods.verify( anInsert, [ 'name', 'age' ] ), False )
+    self.assertEqual( ontods.explain( anInsert, [ 'name', 'age' ] ), ["EXPLANATION : no predicates map subject 'losangeles' to object 'City'"] )
 
     # --------------------------------------------------------------- #
 
@@ -200,15 +200,15 @@ class Test_bdsm( unittest.TestCase ) :
     logging.info( "  Running test " + test_id )
 
     # --------------------------------------------------------------- #
-    # create bdsm instance
-    bdsm = BDSM.BDSM( "pickledb" )
-    logging.debug( "  " + test_id + " : instantiated BDSM instance '" + str( bdsm ) + "' with db type '" + bdsm.nosql_type + "'"  )
+    # create ontods instance
+    ontods = OntoDS.OntoDS( "pickledb" )
+    logging.debug( "  " + test_id + " : instantiated OntoDS instance '" + str( ontods ) + "' with db type '" + ontods.nosql_type + "'"  )
 
     # --------------------------------------------------------------- #
     # input ontology
 
     with self.assertRaises(SystemExit) as cm:
-      exitResult = bdsm.loadOntology( "./someFileName.ttl" )
+      exitResult = ontods.loadOntology( "./someFileName.ttl" )
     self.assertEqual( cm.exception.code, "  LOAD ONTOLOGY : file not found './someFileName.ttl'" )
 
     # --------------------------------------------------------------- #
