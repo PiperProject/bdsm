@@ -9,15 +9,15 @@ import copy, os, pickledb, string, sys, unittest
 def unittest_driver() :
 
   print
-  print "***********************************"
-  print "*   RUNNING TEST SUITE FOR BDSM   *"
-  print "***********************************"
+  print "*************************************"
+  print "*   RUNNING TEST SUITE FOR ONTODS   *"
+  print "*************************************"
   print
 
-  os.system( "python -m unittest Test_bdsm.Test_bdsm.test_example1" )
-  os.system( "python -m unittest Test_bdsm.Test_bdsm.test_example2" )
-  os.system( "python -m unittest Test_bdsm.Test_bdsm.test_example3" )
-  os.system( "python -m unittest Test_bdsm.Test_bdsm.test_example4" )
+  os.system( "python -m unittest Test_ontods.Test_ontods.test_example1" )
+  os.system( "python -m unittest Test_ontods.Test_ontods.test_example2" )
+  os.system( "python -m unittest Test_ontods.Test_ontods.test_example3" )
+  os.system( "python -m unittest Test_ontods.Test_ontods.test_example4" )
 
 
 #########################
