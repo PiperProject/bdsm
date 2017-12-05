@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 ##########################################################################
-# BDSM usage notes:
+# OntoDS usage notes:
 #
 # 1. Currently limited to insertions.
 # 2. Only supports subsumption verification on maps of strings to strings.
@@ -32,7 +32,7 @@ import settings
 DEBUG = settings.DEBUG
 
 
-class BDSM( object ) :
+class OntoDS( object ) :
 
 
   ################
@@ -54,7 +54,7 @@ class BDSM( object ) :
     # instantiate the ontology graph
     self.ontology  = rdflib.Graph()
 
-    logging.debug( "  ...instantiated BDSM instance with ontology object '" + str( self.ontology ) + "'" )
+    logging.debug( "  ...instantiated OntoDS instance with ontology object '" + str( self.ontology ) + "'" )
 
 
   ###################
